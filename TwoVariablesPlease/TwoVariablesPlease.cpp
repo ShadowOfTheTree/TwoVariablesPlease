@@ -3,18 +3,44 @@
 
 #include <iostream>
 
+using namespace std;
+
 int main()
 {
-    std::cout << "Hello World!\n";
+    int valueA;
+    int valueB;
+    int selectedOption;
+    static const string OPTIONS = 
+        "\n 1. add \n 2. subtract \n 3. nultiply \n 4. divide \n 5. raises the power \n 6. counts modulo \n";
+
+    printf("Please enter two numbers with a space between them and hit enter: ");
+    scanf_s("%i %i", &valueA, &valueB);
+
+    //cout << valueA << " " << valueB << endl;
+
+    printf("What would you like to do with the values (%i,%i)", valueA, valueB);
+    printf("%s", OPTIONS.c_str());
+    printf("Please enter a number from the options: ");
+    scanf_s("%i", &selectedOption);
+    //printf("Doing the following selection (%i)", selectedOption);
+    switch (selectedOption) {
+    case 1 :
+        // call add method
+        break;
+    case 2: 
+        //call subtract method
+        break;
+    case 3:
+        //call multiply method
+        break;
+    case 4:
+        //call divide method
+        break;
+    case 5:
+        //call raises power method
+        break;
+    case 6:
+        //call counts modulo method
+        break;
+    }
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
