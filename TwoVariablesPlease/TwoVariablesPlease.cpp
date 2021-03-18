@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <iomanip>
+#include <string>
+#include <ctype.h>
 #include <math.h>
 
 using namespace std;
@@ -31,19 +33,10 @@ int moduloOfValues(int a, int b) {
     return (a % b);
 }
 
-int main()
-{
-    int valueA;
-    int valueB;
+int calculationMenuAndOperations(int valueA, int valueB) {
     int selectedOption;
-    static const string OPTIONS = 
-        "\n 1. add \n 2. subtract \n 3. multiply \n 4. divide \n 5. raises the power \n 6. counts modulo \n 7. EXIT Program \n";
-
-    printf("Please enter two numbers with a space between them and hit enter: ");
-    scanf_s("%i %i", &valueA, &valueB);
-
-    //cout << valueA << " " << valueB << endl;
-
+    static const string OPTIONS =
+        "\n 1. add \n 2. subtract \n 3. multiply \n 4. divide \n 5. raises the power \n 6. counts modulo \n 7. Enter New Values \n 8. EXIT Program \n";
     bool shouldExit = false;
     while (!shouldExit) {
         printf("What would you like to do with the values (%i,%i)", valueA, valueB);
@@ -66,8 +59,13 @@ int main()
             break;
         case 4:
             //call divide method
-            setprecision(5);
-            printf("Result is: %f\n", divideValues(valueA, valueB));
+            if (valueB == 0) {
+                printf("You cannot divide by zero!");
+            }
+            else {
+                setprecision(5);
+                printf("Result is: %f\n", divideValues(valueA, valueB));
+            }
             break;
         case 5:
             //call raises power method
@@ -78,9 +76,38 @@ int main()
             printf("Result is: %d\n", moduloOfValues(valueA, valueB));
             break;
         case 7:
+            //call method to get new values
+            return 7;
+        case 8:
             shouldExit = true;
-            break;
+            exit;
         }
     }
+}
+
+void requestNewInputValues() {
+    int valueA;
+    int valueB;
+    string userInput;
+    printf("Please enter two numbers with a space between them and hit enter: ");
+    getline(cin, userInput);
+    if (userInput.size() == 3 && 
+        isdigit(userInput[0]) && isdigit(userInput[2])) {
+        valueA = (int)userInput[0];
+        valueB = (int)userInput[2];
+        int inputValue = calculationMenuAndOperations(valueA, valueB);
+        if (inputValue == 7) {
+            requestNewInputValues();
+        }
+    }
+    else {
+        printf("You did not enter two integers!\n\n");
+        requestNewInputValues();
+    }
+}
+
+int main()
+{
+    requestNewInputValues();
     return 0;
 }
